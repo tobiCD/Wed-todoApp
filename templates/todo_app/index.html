@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% extends 'todo_app/base.html' %}
+
+</head>
+<body>
+ {% block content  %}
+     {% if object_list  %}
+     	<h3>All my lists</h3>
+     {% endif %}
+     <ul>
+     {% for todolist  in object_list  %}
+     	<li>
+            <div>
+                   {{ todolist.title }}
+                    <button onclick="location.href='{% url 'list'  todolist.id%}'">Show list
+                    </button>
+                    <button onclick="location.href='{% url 'list-edit' todolist.id %}'">Edit</button>
+            </div>
+        </li>
+         {% empty %}
+         <h4>You have no lists</h4>
+     {% endfor %}
+
+     </ul>
+    <p>
+    <input
+        value="Add a new list"
+        type="button"
+        onclick="location.href='{% url "list-add" %}'"/>
+</p>
+    {% endblock %}
+
+</body>
+</html>
